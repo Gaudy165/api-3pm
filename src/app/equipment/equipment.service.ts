@@ -10,10 +10,10 @@ export class EquipmentService {
   constructor(private readonly http: HttpClient) {}
 
   private getHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token') ?? '';
-    return new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders();
+
+    return token ? headers.set('Authorization', `Bearer ${token}`) : headers;
   }
 
   getAll(): Observable<Equipment[]> {
@@ -31,14 +31,12 @@ export class EquipmentService {
   create(data: Equipment): Observable<Equipment> {
     return this.http.post<Equipment>(this.baseUrl, data, {
       headers: this.getHeaders(),
-      responseType: 'json',
     });
   }
 
   update(data: Equipment): Observable<void> {
-    return this.http.put<void>(this.baseUrl, data, {
+    return this.http.put<void>(`${this.baseUrl}/${data.equipment}`, data, {
       headers: this.getHeaders(),
-      responseType: 'text' as 'json',
     });
   }
 

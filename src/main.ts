@@ -1,7 +1,13 @@
+import 'zone.js';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideHttpClient } from '@angular/common/http';
-import { EquipmentListComponent } from './app/equipment/equipment-list.component';
+import { App } from './app/app';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
+import { routes } from './app/app.routes';
 
-bootstrapApplication(EquipmentListComponent, {
-  providers: [provideHttpClient()],
+bootstrapApplication(App, {
+  providers: [
+    provideHttpClient(),
+    provideRouter(routes),
+  ],
 });

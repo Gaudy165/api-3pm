@@ -11,12 +11,7 @@ import { Equipment } from './equipment.model';
   template: `
     <div class="p-6 max-w-xl mx-auto bg-white drop-shadow-2xl rounded-2xl">
       <h2 class="text-2xl font-bold text-gray-800 mb-6">Add Equipment</h2>
-      <form
-        #form="ngForm"
-        (ngSubmit)="save()"
-        class="space-y-5 animate-fade-in"
-        novalidate
-      >
+      <form class="space-y-5 animate-fade-in" novalidate>
         <div>
           <label
             for="equipment"
@@ -132,8 +127,10 @@ export class EquipmentFormComponent {
         };
       },
       error: (err) => {
-        alert('Gagal menambahkan equipment!');
-        console.error('Error saat menambahkan equipment:', err);
+        alert(
+          `Gagal menambahkan equipment!\nStatus: ${err.status}\nMessage: ${err.message}`
+        );
+        console.error('Error lengkap dari API:', err);
       },
     });
   }

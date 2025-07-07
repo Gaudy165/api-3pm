@@ -21,7 +21,7 @@ import { Equipment } from './equipment.model';
 
     <div *ngIf="loading" class="text-blue-500">Loading...</div>
     <div *ngIf="error" class="text-red-500">Error loading detail.</div>
-  `
+  `,
 })
 export class EquipmentDetailComponent {
   private readonly service = inject(EquipmentService);
@@ -48,7 +48,7 @@ export class EquipmentDetailComponent {
       error: () => {
         this.error = true;
         this.loading = false;
-      }
+      },
     });
   }
 }
